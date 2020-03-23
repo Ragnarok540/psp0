@@ -2,8 +2,6 @@ from math import sqrt
 import sys
 
 def construir(x, y=None):
-    if type(x) not in [int, float]:
-        raise ValueError
     return (float(x), y)
 
 def lista(*x):
@@ -28,9 +26,11 @@ def mapear(f, x):
     return construir(f(primero(x)), mapear(f, resto(x))) if x else None
 
 def promedio(x):
-    return sumar(x) / largo(x)
+    return sumar(x) / largo(x) if largo(x) > 0 else 0
 
 def desviacion(x):
+    if largo(x) < 2:
+        return 0
     prom = promedio(x)
     restas = mapear(lambda y: y - prom, x)
     cuadrados = mapear(lambda y: y * y, restas)
@@ -40,11 +40,11 @@ def desviacion(x):
 def main(*x):
     try:
         l = lista(*x)
+        print(f"El promedio es: {promedio(l)}")
+        print(f"La desviación estándar es: {desviacion(l)}")
     except ValueError:
         print("ERROR: Todos los parámetros deben ser números reales o enteros.")
         sys.exit()
-    print(f"El promedio es: {promedio(l)}")
-    print(f"La desviación estándar es: {desviacion(l)}")
 
 if __name__ == '__main__':
     main(*sys.argv[1:])
