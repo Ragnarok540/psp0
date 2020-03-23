@@ -2,6 +2,8 @@ from math import sqrt
 import sys
 
 def construir(x, y=None):
+    if type(x) not in [int, float]:
+        raise ValueError
     return (float(x), y)
 
 def lista(*x):
@@ -36,7 +38,11 @@ def desviacion(x):
     return sqrt(sumatoria / (largo(x) - 1))
 
 def main(*x):
-    l = lista(*x)
+    try:
+        l = lista(*x)
+    except ValueError:
+        print("ERROR: Todos los parámetros deben ser números reales o enteros.")
+        sys.exit()
     print(f"El promedio es: {promedio(l)}")
     print(f"La desviación estándar es: {desviacion(l)}")
 
