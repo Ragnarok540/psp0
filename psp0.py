@@ -1,5 +1,8 @@
+from math import sqrt
+import sys
+
 def construir(x, y=None):
-    return (x, y)
+    return (float(x), y)
 
 def lista(*x):
     return construir(x[0], lista(*x[1:])) if x else None
@@ -22,7 +25,20 @@ def sumar(x):
 def mapear(f, x):
     return construir(f(primero(x)), mapear(f, resto(x))) if x else None
 
-print(sumar(lista(1, 2, 3)))
-print(largo(lista(1, 2, 3)))
-print(mapear(lambda x: x - 1, lista(1, 2.5, 3)))
-print(vacia(lista()))
+def promedio(x):
+    return sumar(x) / largo(x)
+
+def desviacion(x):
+    prom = promedio(x)
+    restas = mapear(lambda y: y - prom, x)
+    cuadrados = mapear(lambda y: y * y, restas)
+    sumatoria = sumar(cuadrados)
+    return sqrt(sumatoria / (largo(x) - 1))
+
+def main(*x):
+    l = lista(*x)
+    print(f"El promedio es: {promedio(l)}")
+    print(f"La desviación estándar es: {desviacion(l)}")
+
+if __name__ == '__main__':
+    main(*sys.argv[1:])
