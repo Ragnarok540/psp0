@@ -107,6 +107,16 @@ class PSP0TestCase(unittest.TestCase):
         observado = psp0.promedio(l)
         self.assertEqual(esperado, observado)
 
+        l = psp0.lista(160, 591, 114, 229, 230, 270, 128, 1657, 624, 1503)
+        esperado = 550.6
+        observado = psp0.promedio(l)
+        self.assertEqual(esperado, observado)
+
+        l = psp0.lista(15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2)
+        esperado = 60.31999999999999
+        observado = psp0.promedio(l)
+        self.assertEqual(esperado, observado)
+
     def test_desviacion(self):
         l = psp0.lista()
         esperado = 0
@@ -120,5 +130,15 @@ class PSP0TestCase(unittest.TestCase):
 
         l = psp0.lista(186, 699, 132, 272, 291, 331, 199, 1890, 788, 1601)
         esperado = 625.6339806770231
+        observado = psp0.desviacion(l)
+        self.assertEqual(esperado, observado)
+
+        l = psp0.lista(160, 591, 114, 229, 230, 270, 128, 1657, 624, 1503)
+        esperado = 572.0268447469149
+        observado = psp0.desviacion(l)
+        self.assertEqual(esperado, observado)
+
+        l = psp0.lista(15.0, 69.9, 6.5, 22.4, 28.4, 65.9, 19.4, 198.7, 38.8, 138.2)
+        esperado = 62.25583060601187
         observado = psp0.desviacion(l)
         self.assertEqual(esperado, observado)
